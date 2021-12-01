@@ -1,4 +1,4 @@
-/* Set the scroll behavior to smooth so that when you click the in the header, the screen scrolls down rather than jumps */
+/* Set the scroll behavior to smooth so that when you click the button in the header, the screen scrolls down rather than jumps */
 html {
   scroll-behavior: smooth;
 }
@@ -9,9 +9,7 @@ body {
 }
 
 header, footer {
-  background-color: #6c757d;
   text-align: left;
-/*  min-width: 500px; */
 }
 
 header {
@@ -19,10 +17,11 @@ header {
   color: #fff;
   min-height: 100vh;
   display: flex;
+  background-image: linear-gradient(#828282, #6c757d, #d6d6d6);
 }
 
 main {
-    background-color: white;
+    background-color: #d6d6d6;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr) ) ;
     grid-gap: 20px;
@@ -100,7 +99,9 @@ a {
 }
 
 .myButton:hover {
-    background-color:#e69708;
+    border-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .myButton:active {
@@ -139,10 +140,15 @@ a {
     margin: auto;
 }
 
-footer {
-    border-top-style:solid;
-    background-color:white;
-    margin-top: 44px;
+footer div {
+  background-image: linear-gradient( #d6d6d6, #6c757d, #6c757d, #6c757d, #6c757d);
+  height: 100%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 14px;
+  display: flex;
+  align-content: center;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 @media all and (max-width:700px) {
