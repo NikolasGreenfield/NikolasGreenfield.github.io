@@ -63,7 +63,7 @@ a {
     text-decoration: none;
 }
 
-.project {
+.projects {
     box-shadow: 0 0px 1px 0 rgb(0 0 0 / 40%);
 }
 
@@ -123,11 +123,10 @@ a {
   text-align: left;
   color: #4a4a4a;
   padding: 0 20px 20px 20px;
-  /*border-top: 1px solid #4a4a4a;*/
 }
 
 .container {
-    /*No min width for better viewing on small screens*/
+    /* No min width for better viewing on small screens*/
     margin: auto;
 }
 
