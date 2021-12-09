@@ -5,6 +5,7 @@ html {
 
 /* Set the margin to 0 to make sure the page stretches all the way to the edge of the browser window. */
 body {
+    background-color: #d6d6d6;
   margin: 0;
 }
 
@@ -21,7 +22,6 @@ header {
 }
 
 main {
-    background-color: #d6d6d6;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr) ) ;
     grid-gap: 20px;
@@ -43,7 +43,7 @@ h1 {
 
 h2 {
   font-family: "Volkhov", serif;
-  font-size: 18px;
+  font-size: 1.4em;
   font-weight: 600;
   letter-spacing: 0.3px;
   text-align: left;
@@ -60,6 +60,10 @@ img {
 a {
     color: #b5179e;
     text-decoration: none;
+}
+
+.project {
+    box-shadow: 0 0px 1px 0 rgb(0 0 0 / 40%);  
 }
 
 .panel {
@@ -109,30 +113,16 @@ a {
     top:1px;
 }
 
-.time {
-  padding-left: 10px;
-  padding-top: 10px;
-  width: 20px;
-  height: auto;
-}
-
 .description {
   font-family: "Quicksand", sans-serif;
-  font-size: 14px;
+  font-size: 1em;
   font-weight: 300;
   line-height: 1.29;
   letter-spacing: 0.1px;
   text-align: left;
   color: #4a4a4a;
-  padding: 10px 0px 10px 10px;
-  border-top: 1px solid #4a4a4a;
-}
-
-.logo {
-  width: 115px;
-  height: 21.1px;
-  object-fit: contain;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
+  /*border-top: 1px solid #4a4a4a;*/
 }
 
 .container {
@@ -141,10 +131,10 @@ a {
 }
 
 footer div {
-  background-image: linear-gradient( #d6d6d6, #6c757d, #6c757d, #6c757d, #6c757d);
+  background-image: linear-gradient( #d6d6d6, #6c757d, #6c757d, #6c757d, #6c757d, #6c757d, #6c757d);
   height: 100%;
   font-family: "Quicksand", sans-serif;
-  font-size: 14px;
+  font-size: 1em;
   display: flex;
   align-content: center;
   padding: 10px 20px;
