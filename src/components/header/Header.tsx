@@ -1,20 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 import './Header.scss';
 
-function Header({color, setColor}:any): JSX.Element {
+function Header({title, headerType}:any): JSX.Element {
     return (
-        <div className={color}>
-            <h1>Nikolas Greenfield</h1>
+        <div className={headerType}>
+            <h1 className="Title">{title}</h1>
+            
+            <div className="Links">
+                <Link to="/home"><Button><div className="Link">
+                Home
+                </div></Button></Link>
+                
+                <Link to="/about"><Button><div className="Link">
+                About Me
+                </div></Button></Link>
 
-            <ul>
-                <li>
-                    <Link to="/home">Home</Link>
-                </li>
-                <li>
-                    <Link to="/about-me">About Me</Link>
-                </li>
-            </ul>
+                <Link to="/experience"><Button><div className="Link">
+                Experience
+                </div></Button></Link>
+            </div>
         </div>
     );
 }

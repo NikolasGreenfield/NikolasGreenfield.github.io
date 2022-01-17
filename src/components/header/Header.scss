@@ -1,6 +1,29 @@
-.red {
-    background-color:red;
+.Main {
+    background-color:grey;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    height: 45vh;
 }
-.blue {
-    background-color:blue;
+
+.Other {
+    background-color:grey;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    height: 15vh;
+}
+
+.Title {
+    font-size: 2.5em;
+}
+
+.Link {
+    font-size: 1.6em;
 }
