@@ -1,0 +1,31 @@
+.Footer {
+    margin-top: auto;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #808080;
+    width: 100vw;
+}
+
+.Contacts {
+    display: flex;
+    flex-direction: row;
+    width: 50vw;
+    margin-right: auto;
+}
+
+.Links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50vw;
+    margin-left: auto;
+}
+
+.List {
+    padding-left: 2vw;
+    list-style-type: none;
+    
+    align-self: center;
+}

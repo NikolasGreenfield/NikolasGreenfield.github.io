@@ -14,13 +14,11 @@ import Footer from './components/footer/Footer';
 
 import './App.scss';
 
+const mainPageTitle: String = "I'm Nikolas Greenfield\n Welcome to my site!";
 
 function App() {
-  const mainPageTitle = useState<string>
-  ("I'm Nikolas Greenfield\n Welcome to my site!");
-  
   return (
-    <>
+    <div className="App">
       {/*
       The main Routing structure. Each link changes the path, and a
       switch decides what component is displayed based on the altered
@@ -50,7 +48,7 @@ function App() {
       </BrowserRouter>
       
       <Footer />
-    </>
+    </div>
   );
 }
 
