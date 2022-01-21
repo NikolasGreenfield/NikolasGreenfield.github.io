@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   BrowserRouter,
   Redirect,
@@ -14,8 +14,6 @@ import Footer from './components/footer/Footer';
 
 import './App.scss';
 
-const mainPageTitle: String = "I'm Nikolas Greenfield\n Welcome to my site!";
-
 function App() {
   return (
     <div className="App">
@@ -27,18 +25,19 @@ function App() {
       <BrowserRouter>
           <Switch>
               <Route exact path={"/"}>
-                  <Header title={mainPageTitle} headerType="Main" />
                   <MainPage />
               </Route>
 
               <Route path={"/about"}>
                   <Header title="About Me" headerType="Other" />
                   <AboutPage />
+                  <Footer />
               </Route>
 
               <Route path={"/experience"}>
                   <Header title="Experience" headerType="Other" />
                   <ExperiencePage />
+                  <Footer />
               </Route>
 
               <Route>
@@ -47,7 +46,6 @@ function App() {
           </Switch>
       </BrowserRouter>
       
-      <Footer />
     </div>
   );
 }

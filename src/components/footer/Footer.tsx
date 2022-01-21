@@ -1,4 +1,6 @@
 import React from 'react'
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 import './Footer.scss'
 
@@ -17,10 +19,10 @@ function Footer(): JSX.Element {
                 <div className="List">
                     <a href="https://www.github.com/NikolasGreenfield"
                     rel="noreferrer" target="_blank">
-                    <button>Github</button></a>
+                    GitHub<GitHubIcon /></a>
                     <a href="https://www.linkedin.com/in/nikolas-greenfield"
                     rel="noreferrer" target="_blank">
-                    <button>Linkedin</button></a>
+                    LinkedIn<LinkedInIcon /></a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,93 @@
+html, body {
+    overflow-x: hidden; // Hides horizontal scroll bar.
+}
+.MainPage {
+    display: flex;
+    flex-direction: column;
+    
+    background-image: url(../../../public/images/Gradient-Background.webp);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.WelcomeSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 60vh;
+    width: 100vw;
+}
+
+
+.IntroSection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    background-color: lightblue;
+    height: 45vh;
+    width: 100vw;
+    overflow: auto;
+}
+.Intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 60vw;
+}
+.Image {
+    margin-left: auto;
+    padding-right: 2vw;
+    width: 35vw;
+}
+
+
+.VTSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-image:
+    url(../../../public/images/Hokie-Stone-Virginia-Tech.jpg);
+
+    height: 60vh;
+    width: 100vw;
+}
+.VTSentence {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: white;
+    height: 15%;
+    width: 75%;
+    font-size: 2rem
+}
+
+
+.LinkSection {
+    background-color: lightblue;
+    height: 45vh;
+}
+.About {
+
+}
+.Experience {
+
+}
+
+
+.ExtraLinks {
+    background-color: grey;
+    height: 45vh;
+}
+.GitHub {
+
+}
+.LinkedIn {
+
+}
