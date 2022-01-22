@@ -5,7 +5,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 import './MainPage.scss';
-import Headshot from './Headshot.jpg';
+import Headshot from '../../assets/Headshot.jpg';
 
 function MainPage(): JSX.Element {
     return(
@@ -36,8 +36,8 @@ function MainPage(): JSX.Element {
                 </div>
                 <div className="Experience">
                     <h2>Continue into the site to learn a little more about me</h2>
-                    <Link to="/home"><Button><div className="Link">
-                    Home
+                    <Link to="/experience"><Button><div className="Link">
+                    Experience
                     </div></Button></Link>
                 </div>
             </div>
