@@ -4,15 +4,15 @@ import { Button } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-import './MainPage.scss';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 import Headshot from '../../assets/Headshot.jpg';
+import './MainPage.scss';
 
 function MainPage(): JSX.Element {
     return(
         <div className="MainPage">
-            <div className="WelcomeSection">
-                <h1>Welcome To My Site!</h1>
-            </div>
+            <Header title="Welcome To My Site!" className="Main" />
 
             <div className="IntroSection">
                 <div className="Intro">
@@ -57,6 +57,9 @@ function MainPage(): JSX.Element {
                     LinkedIn<LinkedInIcon /></a>
                 </div>
             </div>
+
+            
+            <Footer />
         </div>
     );
 }

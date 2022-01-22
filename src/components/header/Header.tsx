@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import './Header.scss';
 
-function Header({title, headerType}:any): JSX.Element {
+function Header({title, className}:any): JSX.Element {
     return (
-        <div className={headerType}>
+        <div className={className}>
             <h1 className="Title">{title}</h1>
             
             <div className="Links">

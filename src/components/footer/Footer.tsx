@@ -14,7 +14,7 @@ function Footer(): JSX.Element {
                     <li>Phone: (540)270-2267</li>
                 </ul>
             </div>
-            <div className="Links">
+            <div className="FooterLinks">
                 <h4>Find Me At:</h4>
                 <div className="List">
                     <a href="https://www.github.com/NikolasGreenfield"
