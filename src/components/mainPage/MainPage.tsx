@@ -9,10 +9,14 @@ import Footer from '../footer/Footer';
 import Headshot from '../../assets/Headshot.jpg';
 import './MainPage.scss';
 
+
+/**
+ * The main page that is displayed by default, linking to extra pages.
+ */
 function MainPage(): JSX.Element {
     return(
         <div className="MainPage">
-            <Header title="Welcome To My Site!" className="Main" />
+            <Header title="Welcome to the Website" className="Main" />
 
             <div className="IntroSection">
                 <div className="Intro">
@@ -58,7 +62,6 @@ function MainPage(): JSX.Element {
                 </div>
             </div>
 
-            
             <Footer />
         </div>
     );

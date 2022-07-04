@@ -12,6 +12,9 @@ import ExperiencePage from './components/experiencePage/ExperiencePage';
 
 import './App.scss';
 
+/**
+  The main functional component that the entire app resides in.
+*/
 function App() {
   return (
     <div className="App">
@@ -39,7 +42,6 @@ function App() {
               </Route>
           </Switch>
       </BrowserRouter>
-      
     </div>
   );
 }
