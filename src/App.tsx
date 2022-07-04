@@ -14,6 +14,8 @@ import './App.scss';
 
 /**
   The main functional component that the entire app resides in.
+  Composed of a single browser router to route to each page based on current
+  url subdirectory.
 */
 function App() {
   return (
@@ -21,7 +23,8 @@ function App() {
       {/*
       The main Routing structure. Each link changes the path, and a
       switch decides what component is displayed based on the altered
-      path. If an unknown path, redirect back to home /.
+      path.
+      The default path routes back to "/".
       */}
       <BrowserRouter>
           <Switch>

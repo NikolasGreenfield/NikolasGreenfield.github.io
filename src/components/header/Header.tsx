@@ -11,7 +11,7 @@ interface IProps{
 function Header({title, className}: IProps): JSX.Element {
     return (
         <div className={className}>
-            <h1 className="position-absolute top-50 start-50 translate-middle">
+            <h1 className="position-absolute top-50 start-50 translate-middle Title">
             {title}
             </h1>
 
