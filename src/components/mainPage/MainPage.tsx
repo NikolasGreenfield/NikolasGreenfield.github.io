@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -8,14 +8,24 @@ import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import Headshot from '../../assets/Headshot.jpg';
 import './MainPage.scss';
-
+import { getAPODURL } from 'APIClients/FetchAPOD';
 
 /**
  * The main page that is displayed by default, linking to extra pages.
+ * Uses the NASA APOD API to get daily a daily astronomy picture and uses this iamge as the header
+ * background image.
  */
 function MainPage(): JSX.Element {
+    const [APODURL, setAPODURL] = useState<string>("");
+    useEffect(() => {
+        getAPODURL().then((response)=>setAPODURL(response));
+    }, []);
+
+    /**
+     * Returns the tsx div that will be displayed when the component is included.
+     */
     return(
-        <div className="MainPage">
+        <div className="MainPage" style={{backgroundImage: `url(${APODURL})`}}>
             <Header title="Welcome to the Website" className="Main" />
 
             <div className="IntroSection">

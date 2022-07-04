@@ -5,10 +5,13 @@ html, body {
     display: flex;
     flex-direction: column;
     
-    background-image: url(../../assets/Gradient-Background.webp);
+    //background-image: url(../../assets/Gradient-Background.webp);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    background-color:white;
+    opacity: 100;
+    color: white;
 }
 
 .IntroSection {
