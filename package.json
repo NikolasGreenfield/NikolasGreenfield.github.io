@@ -17,6 +17,7 @@
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://NikolasGreenfield.github.io",
   "scripts": {
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
