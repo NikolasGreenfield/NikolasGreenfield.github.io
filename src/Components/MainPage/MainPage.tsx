@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
+import './MainPage.scss';
 
 function MainPage() {
     return (
-        <h1>
-            MainPage
-        </h1>
+        <div>
+            <h1>MainPage</h1>
+            <Link to={'portfolio'}>To Portfolio</Link>
+        </div>
     );
 }
 

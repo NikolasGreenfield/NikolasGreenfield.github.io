@@ -1,13 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+import './App.scss';
 import MainPage from './Components/MainPage/MainPage';
 
+// Defines the paths for routing between pages
+const router = createBrowserRouter([
+  {path: "/", element: <MainPage/>},
+  {path: "/portfolio", element: <div>Portfolio!</div>},
+]);
+
+/**
+ * Main component of the application which routes between pages.
+ */
 function App() {
   return (
-    <div className="App">
-      <MainPage/>
-    </div>
+    <React.StrictMode>
+      <div className="App">
+          <RouterProvider router={router} />
+      </div>
+    </React.StrictMode>
   );
 }
 
