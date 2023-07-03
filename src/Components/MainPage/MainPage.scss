@@ -1,0 +1,31 @@
+#MainPage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#TitleCard {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 60vh;
+    //align-items: center;
+    background-color: rgb(160, 160, 160);
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.TitleText {
+    margin-top: 20%;
+    font-size: 4em;
+}
+
+#ProfPhoto {
+    height: 100%;
+    border-color: black;
+    border-radius: 15%;
+    border-style: solid;
+    border-width: 3px;
+}
