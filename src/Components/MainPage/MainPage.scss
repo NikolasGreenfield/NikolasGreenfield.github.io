@@ -1,31 +1,87 @@
 #MainPage {
     height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background-image: url('SkyLineBackground.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+.FloatingButton {
+    position: absolute;
+    left: 90%;
+    top: 10%;
 }
 
 #TitleCard {
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 60vh;
-    //align-items: center;
-    background-color: rgb(160, 160, 160);
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 98vw;
+    height: 100vh;
+    align-items: center;
     display: flex;
     justify-content: space-evenly;
+    padding: 0 0 2vh 0;
+    margin: 0 1vw 0 1vw;
 }
 
 .TitleText {
     margin-top: 20%;
-    font-size: 4em;
+    font-size: 0;
+    width: 33%;
+    text-align: center;
 }
-
 #ProfPhoto {
     height: 100%;
-    border-color: black;
-    border-radius: 15%;
-    border-style: solid;
-    border-width: 3px;
+    max-height: 70vh;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20%;
+}
+
+#PortfolioLinkSection {
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1vw 0 1vw;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+
+}
+.SectionBlock {
+    margin: 1vh 1vw 0 1vw;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-style: outset;
+}
+#ExperienceSection {
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 20vh;
+    padding: 0 0 0 2vw;
+}
+#EducationSection {
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 20vh;
+    text-align: right;
+    padding: 0 2vw 0 0;
+}
+#SkillsSection {
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 20vh;
+    padding: 0 0 0 2vw;
+}
+.Link {
+    text-decoration: none;
+
+}
+
+h2 {
+    margin: 0;
+    padding: 1% 0 0 0;
+}
+
+@keyframes TitleCardMoveToStart {
+    from {
+    }
+    to {
+        height: 40vh;
+        background-image: url('SkyLineBackground.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+    }
 }
