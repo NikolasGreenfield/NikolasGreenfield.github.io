@@ -9,14 +9,17 @@ import './MainPage.scss';
 import ProfPhoto from './CapAndGownPhoto.png'
 
 function MainPage() {
-    const [titleCardStyle, setTitleCardStyle] = useState({});
+    const [titleCardClass, setTitleCardClass] = useState("");
+    const [floatingButtonStyle, setFloatingButtonStyle] = useState({});
     const [titleTextStyle, setTitleTextStyle] = useState({});
     const [titleTextStyle2, setTitleTextStyle2] = useState({});
     const [BioTextStyle, setBioTextStyle] = useState({});
     const [pageContentStyle, setPageContentStyle] = useState({});
 
     useEffect(() => {
-        setPageContentStyle({visibility: "hidden"});
+        setBioTextStyle({opacity: "0"});
+        setPageContentStyle({opacity: "0"});
+        setFloatingButtonStyle({opacity: "0"});
         setTimeout(() => {
             setTitleTextStyle({visibility: "visible"});
         }, 1000);
@@ -24,21 +27,33 @@ function MainPage() {
             setTitleTextStyle2({visibility: "visible"});
         }, 2000);
         setTimeout(() => {
-            setTitleCardStyle({animation: "TitleCardMoveToStart 3s forwards"});
-            setTitleTextStyle({visibility: "visible",
-                                animation: "TitleTextBecomeInline 3s forwards"});
-            setTitleTextStyle2({visibility: "visible",
-                                animation: "TitleTextBecomeInline 3s forwards"});
-            setBioTextStyle({visibility: "visible",
-                                animation: "ease-in 4s"});
-            setPageContentStyle({visibility: "visible",
-                                animation: "fadeIn 4s"});
+            setTitleCardClass("ShrinkTitleCardAnimation");
+            setBioTextStyle({transition: "opacity 1s linear"});
+            setPageContentStyle({transition: "opacity 1s linear"});
+            setFloatingButtonStyle({transition: "opacity 1s linear"});
         }, 4000);
     }, []);
 
     return (
         <div id="MainPage" >
-            <div id="TitleCard" style={titleCardStyle}>
+            <Fab className="FloatingButton" id="ThemeFloatingButton"
+                style={floatingButtonStyle}>
+                <ContrastIcon/>
+            </Fab>
+            <div id="NavigationButtons">
+                <Fab variant="extended" className="FloatingButton" id="PortfolioFloatingButton"
+                    style={floatingButtonStyle}>
+                    <PermMediaIcon sx={{ mr: 1 }}/>
+                    <h3>Portfolio</h3>
+                </Fab>
+                <Fab variant="extended" className="FloatingButton" id="HomeFloatingButton"
+                    style={floatingButtonStyle}>
+                    <HomeIcon sx={{ mr: 1 }}/>
+                    <h3>Home</h3>
+                </Fab>
+            </div>
+
+            <div id="TitleCard" className={titleCardClass}>
                 <img id="ProfPhoto" 
                     className="TitleCardElement"
                     src={ProfPhoto} 
@@ -49,21 +64,23 @@ function MainPage() {
                         <h1 className="TitleText" style={titleTextStyle}>Hi</h1>
                         <h1 className="TitleText" style={titleTextStyle2}>, I'm Nik</h1>
                     </div>
-                    <p id="BioText" style={BioTextStyle}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua. Bibendum neque egestas congue quisque. 
-                        Id porta nibh venenatis cras sed felis eget. Parturient montes nascetur 
-                        ridiculus mus mauris. Quis commodo odio aenean sed adipiscing diam donec. 
-                        Vel eros donec ac odio. Gravida arcu ac tortor dignissim convallis aenean 
-                        et. Leo in vitae turpis massa sed elementum. Urna neque viverra justo nec. 
-                        Sit amet nisl purus in. Consequat id porta nibh venenatis.
-                        <br/>
-                        Ac felis donec et odio pellentesque. Eget magna fermentum iaculis eu non. Commodo sed egestas 
-                        egestas fringilla phasellus faucibus scelerisque eleifend. Quam id leo in vitae 
-                        turpis massa. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. 
-                        Arcu vitae elementum curabitur vitae nunc. Laoreet sit amet cursus sit amet. 
-                        Sed viverra tellus in hac habitasse platea dictumst vestibulum.
-                    </p>
+                    <div id="BioText" style={BioTextStyle}>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                            labore et dolore magna aliqua. Bibendum neque egestas congue quisque. 
+                            Id porta nibh venenatis cras sed felis eget. Parturient montes nascetur 
+                            ridiculus mus mauris. Quis commodo odio aenean sed adipiscing diam donec. 
+                            Vel eros donec ac odio. Gravida arcu ac tortor dignissim convallis aenean 
+                            et. Leo in vitae turpis massa sed elementum. Urna neque viverra justo nec. 
+                            Sit amet nisl purus in. Consequat id porta nibh venenatis.
+                            <br/>
+                            Ac felis donec et odio pellentesque. Eget magna fermentum iaculis eu non. Commodo sed egestas 
+                            egestas fringilla phasellus faucibus scelerisque eleifend. Quam id leo in vitae 
+                            turpis massa. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. 
+                            Arcu vitae elementum curabitur vitae nunc. Laoreet sit amet cursus sit amet. 
+                            Sed viverra tellus in hac habitasse platea dictumst vestibulum.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div style={pageContentStyle}>
@@ -127,19 +144,6 @@ function MainPage() {
                         Sed viverra tellus in hac habitasse platea dictumst vestibulum.
                     </p>
                 </div>
-
-
-                <Fab variant="extended" className="FloatingButton">
-                    <PermMediaIcon sx={{ mr: 1 }}/>
-                    <h3>Portfolio</h3>
-                </Fab>
-                <Fab variant="extended" className="FloatingButton">
-                    <HomeIcon sx={{ mr: 1 }}/>
-                    <h3>Home</h3>
-                </Fab>
-                <Fab className="FloatingButton">
-                    <ContrastIcon/>
-                </Fab>
             </div>
         </div>
     );

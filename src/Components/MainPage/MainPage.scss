@@ -1,28 +1,38 @@
 #MainPage {
-    height: 100vh;
+    height: auto;
     background-image: url('SkyLineBackground.jpg');
     background-size: cover;
     background-attachment: fixed;
+    padding: 1vh 1vw 0 1vw;
 }
 .FloatingButton {
+
+}
+#NavigationButtons {
+    margin: 1vw;
     position: absolute;
-    left: 90%;
-    top: 10%;
+    top: 1vh;
+    right: 0;
+}
+#ThemeFloatingButton {
+    position: absolute;
+    top: 1vh;
+    left: 1vw;
+}
+#HomeFloatingButton {
+}
+#PortfolioFloatingButton {
+    margin-right: 1vw;
 }
 
 #TitleCard {
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 98vw;
+    width: 100%;
     height: 100vh;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 0 0 2vh 0;
-    margin: 0 1vw 0 1vw;
-    background-image: url('SkyLineBackground.jpg');
-    background-size: cover;
-    background-attachment: fixed;
+    margin-bottom: 2vh;
 }
 #BioSection {
     width: 50%;
@@ -37,17 +47,18 @@
     font-size: 4em;
     visibility: hidden;
     margin: 0;
-    display: inline-block;
+    display: inline;
 }
 #BioText {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10%;
-    padding: 5%;
-    visibility: hidden;
+    padding: 4%;
+    margin-top: 1vh;
+    height: 50%;
 }
 #ProfPhoto {
     height: 100%;
-    max-height: 70vh;
+    max-height: 40vw;
     border: 5px solid rgba(0, 0, 0, 0.1);
     border-radius: 20%;
 }
@@ -58,34 +69,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 1vw 0 1vw;
     border-top: 2px solid rgba(0, 0, 0, 0.1);
 
 }
 .SectionBlock {
-    margin: 1vh 1vw 0 1vw;
+    margin-top: 1vh;
     border: 5px solid rgba(0, 0, 0, 0.1);
     border-style: outset;
 }
 #ExperienceSection {
     background-color: rgba(255, 255, 255, 0.9);
-    height: 20vh;
     padding: 0 0 0 2vw;
 }
 #EducationSection {
     background-color: rgba(255, 255, 255, 0.9);
-    height: 20vh;
     text-align: right;
     padding: 0 2vw 0 0;
 }
 #SkillsSection {
     background-color: rgba(255, 255, 255, 0.9);
-    height: 20vh;
+    margin-top: 1vh;
     padding: 0 0 0 2vw;
 }
 .Link {
     text-decoration: none;
-
 }
 
 h2 {
@@ -93,16 +100,40 @@ h2 {
     padding: 1% 0 0 0;
 }
 
-@keyframes TitleCardMoveToStart {
+.ShrinkTitleCardAnimation {
+    animation: ShrinkTitleCardFixed 3s forwards;
+}
+
+@keyframes ShrinkTitleCardFixed {
     to {
         height: 40vh;
     }
 }
-@keyframes TitleTextBecomeInline {
-    from {
-        display: block;
-    }
+@keyframes ShrinkTitleCardAuto {
     to {
-        display: inline-block;
+        height: auto;
+    }
+}
+
+@media (max-width : 1024px) and (orientation : portrait) {
+    #TitleCard {
+        padding-top: 10vh;
+        flex-direction: column;
+        justify-content: start;
+        animation: ShrinkTitleCardAuto 3s forwards; 
+    }
+    #ProfPhoto {
+        height: 80vw;
+        max-height: 80vw;
+    }
+    #BioSection {
+        width: 100%;
+        height: auto;
+    }
+    #BioText {
+        height: auto;
+    }
+    .SectionBlock {
+        height: auto;
     }
 }
