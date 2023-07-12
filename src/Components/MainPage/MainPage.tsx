@@ -9,12 +9,12 @@ import './MainPage.scss';
 import ProfPhoto from './CapAndGownPhoto.png'
 
 function MainPage() {
-    const [titleCardClass, setTitleCardClass] = useState("");
-    const [floatingButtonStyle, setFloatingButtonStyle] = useState({});
-    const [titleTextStyle, setTitleTextStyle] = useState({});
-    const [titleTextStyle2, setTitleTextStyle2] = useState({});
-    const [BioTextStyle, setBioTextStyle] = useState({});
-    const [pageContentStyle, setPageContentStyle] = useState({});
+    const [titleCardClass, setTitleCardClass] = useState<string>("");
+    const [floatingButtonStyle, setFloatingButtonStyle] = useState<React.CSSProperties>({});
+    const [titleTextStyle, setTitleTextStyle] = useState<React.CSSProperties>({});
+    const [titleTextStyle2, setTitleTextStyle2] = useState<React.CSSProperties>({});
+    const [BioTextStyle, setBioTextStyle] = useState<React.CSSProperties>({});
+    const [pageContentStyle, setPageContentStyle] = useState<React.CSSProperties>({});
 
     useEffect(() => {
         setBioTextStyle({opacity: "0"});
@@ -73,12 +73,6 @@ function MainPage() {
                             Vel eros donec ac odio. Gravida arcu ac tortor dignissim convallis aenean 
                             et. Leo in vitae turpis massa sed elementum. Urna neque viverra justo nec. 
                             Sit amet nisl purus in. Consequat id porta nibh venenatis.
-                            <br/>
-                            Ac felis donec et odio pellentesque. Eget magna fermentum iaculis eu non. Commodo sed egestas 
-                            egestas fringilla phasellus faucibus scelerisque eleifend. Quam id leo in vitae 
-                            turpis massa. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. 
-                            Arcu vitae elementum curabitur vitae nunc. Laoreet sit amet cursus sit amet. 
-                            Sed viverra tellus in hac habitasse platea dictumst vestibulum.
                         </p>
                     </div>
                 </div>
@@ -92,24 +86,24 @@ function MainPage() {
 
                 <div id="ExperienceSection" className="SectionBlock">
                     <h2>My Work Experience</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua. Bibendum neque egestas congue quisque. 
-                        Id porta nibh venenatis cras sed felis eget. Parturient montes nascetur 
-                        ridiculus mus mauris. Quis commodo odio aenean sed adipiscing diam donec. 
-                        Vel eros donec ac odio. Gravida arcu ac tortor dignissim convallis aenean 
-                        et. Leo in vitae turpis massa sed elementum. Urna neque viverra justo nec. 
-                        Sit amet nisl purus in. Consequat id porta nibh venenatis.
-                        <br/>
-                        Ac felis donec et odio pellentesque. Eget magna fermentum iaculis eu non. Commodo sed egestas 
-                        egestas fringilla phasellus faucibus scelerisque eleifend. Quam id leo in vitae 
-                        turpis massa. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. 
-                        Arcu vitae elementum curabitur vitae nunc. Laoreet sit amet cursus sit amet. 
-                        Sed viverra tellus in hac habitasse platea dictumst vestibulum.
-                    </p>
+                    <h3>
+                    Software Engineering Internship - Parsons Corporation<br/>
+                    May 2023 - Present
+                    </h3>
+                    <ul style={{listStyleType: "square"}}>
+                        <li>
+                            Developed data visualization dashboards, SharePoint list storage solutions, and pdf generators to provide creation, completion, and final storage of user applications utilizing Power Apps, Power Automate, OneDrive, and SharePoint.
+                        </li>
+                        <li>
+                            Actively participated in daily standups, client meetings, sprint retrospective and planning meetings in a remote agile environment.
+                        </li>
+                        <li>
+                            Relied on cooperative development technologies including Jira iteration boards, Azure Dev-Ops, Slack communication, and Confluence documentation to ensure communication within and outside of the team.
+                        </li>
+                    </ul>
                 </div>
                 <div  id="EducationSection" className="SectionBlock">
-                    <h2>My Education</h2>
+                    <h2 style={{textAlign: "right"}}>My Education</h2>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
                         labore et dolore magna aliqua. Bibendum neque egestas congue quisque. 
