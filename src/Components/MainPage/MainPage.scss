@@ -16,16 +16,34 @@
     height: 100vh;
     align-items: center;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: row;
+    justify-content: center;
     padding: 0 0 2vh 0;
     margin: 0 1vw 0 1vw;
+    background-image: url('SkyLineBackground.jpg');
+    background-size: cover;
+    background-attachment: fixed;
 }
-
+#BioSection {
+    width: 50%;
+    padding: 2%;
+}
+#BioTitle {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 .TitleText {
-    margin-top: 20%;
-    font-size: 0;
-    width: 33%;
-    text-align: center;
+    font-size: 4em;
+    visibility: hidden;
+    margin: 0;
+    display: inline-block;
+}
+#BioText {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10%;
+    padding: 5%;
+    visibility: hidden;
 }
 #ProfPhoto {
     height: 100%;
@@ -76,12 +94,15 @@ h2 {
 }
 
 @keyframes TitleCardMoveToStart {
-    from {
-    }
     to {
         height: 40vh;
-        background-image: url('SkyLineBackground.jpg');
-        background-size: cover;
-        background-attachment: fixed;
+    }
+}
+@keyframes TitleTextBecomeInline {
+    from {
+        display: block;
+    }
+    to {
+        display: inline-block;
     }
 }

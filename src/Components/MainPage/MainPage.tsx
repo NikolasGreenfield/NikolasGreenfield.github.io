@@ -12,36 +12,59 @@ function MainPage() {
     const [titleCardStyle, setTitleCardStyle] = useState({});
     const [titleTextStyle, setTitleTextStyle] = useState({});
     const [titleTextStyle2, setTitleTextStyle2] = useState({});
+    const [BioTextStyle, setBioTextStyle] = useState({});
     const [pageContentStyle, setPageContentStyle] = useState({});
 
     useEffect(() => {
         setPageContentStyle({visibility: "hidden"});
         setTimeout(() => {
-            setTitleTextStyle({fontSize: "4em"});
+            setTitleTextStyle({visibility: "visible"});
         }, 1000);
         setTimeout(() => {
-            setTitleTextStyle2({fontSize: "4em"});
+            setTitleTextStyle2({visibility: "visible"});
         }, 2000);
         setTimeout(() => {
             setTitleCardStyle({animation: "TitleCardMoveToStart 3s forwards"});
-            setPageContentStyle({visibility: "visible", animation: "fadeIn 4s"});
+            setTitleTextStyle({visibility: "visible",
+                                animation: "TitleTextBecomeInline 3s forwards"});
+            setTitleTextStyle2({visibility: "visible",
+                                animation: "TitleTextBecomeInline 3s forwards"});
+            setBioTextStyle({visibility: "visible",
+                                animation: "ease-in 4s"});
+            setPageContentStyle({visibility: "visible",
+                                animation: "fadeIn 4s"});
         }, 4000);
     }, []);
 
     return (
         <div id="MainPage" >
             <div id="TitleCard" style={titleCardStyle}>
-                <h1 className="TitleText TitleCardElement" id='TitleHiText' style={titleTextStyle}>
-                    Hi
-                </h1>
                 <img id="ProfPhoto" 
                     className="TitleCardElement"
                     src={ProfPhoto} 
                     alt="Me at graduation."
                 />
-                <h1 className="TitleText TitleCardElement" id='TitleImText' style={titleTextStyle2}>
-                    I'm Nik
-                </h1>
+                <div id="BioSection">
+                    <div id="BioTitle">
+                        <h1 className="TitleText" style={titleTextStyle}>Hi</h1>
+                        <h1 className="TitleText" style={titleTextStyle2}>, I'm Nik</h1>
+                    </div>
+                    <p id="BioText" style={BioTextStyle}>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                        labore et dolore magna aliqua. Bibendum neque egestas congue quisque. 
+                        Id porta nibh venenatis cras sed felis eget. Parturient montes nascetur 
+                        ridiculus mus mauris. Quis commodo odio aenean sed adipiscing diam donec. 
+                        Vel eros donec ac odio. Gravida arcu ac tortor dignissim convallis aenean 
+                        et. Leo in vitae turpis massa sed elementum. Urna neque viverra justo nec. 
+                        Sit amet nisl purus in. Consequat id porta nibh venenatis.
+                        <br/>
+                        Ac felis donec et odio pellentesque. Eget magna fermentum iaculis eu non. Commodo sed egestas 
+                        egestas fringilla phasellus faucibus scelerisque eleifend. Quam id leo in vitae 
+                        turpis massa. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. 
+                        Arcu vitae elementum curabitur vitae nunc. Laoreet sit amet cursus sit amet. 
+                        Sed viverra tellus in hac habitasse platea dictumst vestibulum.
+                    </p>
+                </div>
             </div>
             <div style={pageContentStyle}>
                 <div id="PortfolioLinkSection">
@@ -52,15 +75,57 @@ function MainPage() {
 
                 <div id="ExperienceSection" className="SectionBlock">
                     <h2>My Work Experience</h2>
-                    <p></p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                        labore et dolore magna aliqua. Bibendum neque egestas congue quisque. 
+                        Id porta nibh venenatis cras sed felis eget. Parturient montes nascetur 
+                        ridiculus mus mauris. Quis commodo odio aenean sed adipiscing diam donec. 
+                        Vel eros donec ac odio. Gravida arcu ac tortor dignissim convallis aenean 
+                        et. Leo in vitae turpis massa sed elementum. Urna neque viverra justo nec. 
+                        Sit amet nisl purus in. Consequat id porta nibh venenatis.
+                        <br/>
+                        Ac felis donec et odio pellentesque. Eget magna fermentum iaculis eu non. Commodo sed egestas 
+                        egestas fringilla phasellus faucibus scelerisque eleifend. Quam id leo in vitae 
+                        turpis massa. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. 
+                        Arcu vitae elementum curabitur vitae nunc. Laoreet sit amet cursus sit amet. 
+                        Sed viverra tellus in hac habitasse platea dictumst vestibulum.
+                    </p>
                 </div>
                 <div  id="EducationSection" className="SectionBlock">
                     <h2>My Education</h2>
-                    <p></p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                        labore et dolore magna aliqua. Bibendum neque egestas congue quisque. 
+                        Id porta nibh venenatis cras sed felis eget. Parturient montes nascetur 
+                        ridiculus mus mauris. Quis commodo odio aenean sed adipiscing diam donec. 
+                        Vel eros donec ac odio. Gravida arcu ac tortor dignissim convallis aenean 
+                        et. Leo in vitae turpis massa sed elementum. Urna neque viverra justo nec. 
+                        Sit amet nisl purus in. Consequat id porta nibh venenatis.
+                        <br/>
+                        Ac felis donec et odio pellentesque. Eget magna fermentum iaculis eu non. Commodo sed egestas 
+                        egestas fringilla phasellus faucibus scelerisque eleifend. Quam id leo in vitae 
+                        turpis massa. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. 
+                        Arcu vitae elementum curabitur vitae nunc. Laoreet sit amet cursus sit amet. 
+                        Sed viverra tellus in hac habitasse platea dictumst vestibulum.
+                    </p>
                 </div>
                 <div  id="SkillsSection" className="SectionBlock">
                     <h2>My Skills</h2>
-                    <p></p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                        labore et dolore magna aliqua. Bibendum neque egestas congue quisque. 
+                        Id porta nibh venenatis cras sed felis eget. Parturient montes nascetur 
+                        ridiculus mus mauris. Quis commodo odio aenean sed adipiscing diam donec. 
+                        Vel eros donec ac odio. Gravida arcu ac tortor dignissim convallis aenean 
+                        et. Leo in vitae turpis massa sed elementum. Urna neque viverra justo nec. 
+                        Sit amet nisl purus in. Consequat id porta nibh venenatis.
+                        <br/>
+                        Ac felis donec et odio pellentesque. Eget magna fermentum iaculis eu non. Commodo sed egestas 
+                        egestas fringilla phasellus faucibus scelerisque eleifend. Quam id leo in vitae 
+                        turpis massa. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. 
+                        Arcu vitae elementum curabitur vitae nunc. Laoreet sit amet cursus sit amet. 
+                        Sed viverra tellus in hac habitasse platea dictumst vestibulum.
+                    </p>
                 </div>
 
 
