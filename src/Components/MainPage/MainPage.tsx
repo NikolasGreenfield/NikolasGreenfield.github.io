@@ -86,10 +86,10 @@ function MainPage() {
 
                 <div id="ExperienceSection" className="SectionBlock">
                     <h2>My Work Experience</h2>
-                    <h3>
-                    Software Engineering Internship - Parsons Corporation<br/>
-                    May 2023 - Present
-                    </h3>
+                    <div className="ResumeItems">
+                        <h3>Software Engineering Internship - Parsons Corporation</h3>
+                        <h3 style={{marginLeft: "5vw"}}>May 2023 - Aug 2023</h3>
+                    </div>
                     <ul style={{listStyleType: "square"}}>
                         <li>
                             Developed data visualization dashboards, SharePoint list storage solutions, and pdf generators to provide creation, completion, and final storage of user applications utilizing Power Apps, Power Automate, OneDrive, and SharePoint.
@@ -104,21 +104,34 @@ function MainPage() {
                 </div>
                 <div  id="EducationSection" className="SectionBlock">
                     <h2 style={{textAlign: "right"}}>My Education</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua. Bibendum neque egestas congue quisque. 
-                        Id porta nibh venenatis cras sed felis eget. Parturient montes nascetur 
-                        ridiculus mus mauris. Quis commodo odio aenean sed adipiscing diam donec. 
-                        Vel eros donec ac odio. Gravida arcu ac tortor dignissim convallis aenean 
-                        et. Leo in vitae turpis massa sed elementum. Urna neque viverra justo nec. 
-                        Sit amet nisl purus in. Consequat id porta nibh venenatis.
-                        <br/>
-                        Ac felis donec et odio pellentesque. Eget magna fermentum iaculis eu non. Commodo sed egestas 
-                        egestas fringilla phasellus faucibus scelerisque eleifend. Quam id leo in vitae 
-                        turpis massa. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. 
-                        Arcu vitae elementum curabitur vitae nunc. Laoreet sit amet cursus sit amet. 
-                        Sed viverra tellus in hac habitasse platea dictumst vestibulum.
-                    </p>
+                    <table>
+                        <tr>
+                            <td style={{width: "60%"}}>
+                                <h3>Virginia Tech</h3>
+                                <h3>Bachelor of Science in Computer Science</h3>
+                            </td>
+                            <td style={{width: "40%", border: "1px solid red"}}>
+                                <h3>Graduated: May 2023</h3>
+                                <h3>GPA: 3.66</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{width: "60%"}}>
+                                <h3>Germanna Scholars Student</h3>
+                            </td>
+                            <td style={{width: "40%"}}>
+                                <h3>Graduated: May 2020</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{width: "60%"}}>
+                                <h3>General Studies associate degree</h3>
+                            </td>
+                            <td style={{width: "40%"}}>
+                                <h3>GPA: 4.0</h3>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div  id="SkillsSection" className="SectionBlock">
                     <h2>My Skills</h2>
