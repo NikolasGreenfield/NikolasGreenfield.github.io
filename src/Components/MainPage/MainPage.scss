@@ -33,6 +33,7 @@
     flex-direction: row;
     justify-content: center;
     margin-bottom: 2vh;
+    margin-top: 2vh;
 }
 #BioSection {
     width: 50%;
@@ -64,6 +65,8 @@
 }
 
 #PortfolioLinkSection {
+    width: 85%;
+    padding: 0 2vw 0 2vw;
     background-color: rgba(255, 255, 255, 0.9);
     height: 10vh;
     display: flex;
@@ -72,7 +75,13 @@
     border-top: 2px solid rgba(0, 0, 0, 0.1);
 
 }
+#ResumeContentBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .SectionBlock {
+    width: 80%;
     margin-top: 1vh;
     border: 5px solid rgba(0, 0, 0, 0.1);
     border-style: outset;
@@ -83,15 +92,31 @@
 }
 #EducationSection {
     background-color: rgba(255, 255, 255, 0.9);
+    padding-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #SkillsSection {
     background-color: rgba(255, 255, 255, 0.9);
     margin-top: 1vh;
 }
+.SectionHeader {
+    border-bottom: 1px solid black;
+    padding-bottom: 0.2em;
+}
 .ResumeItems {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.ShortenedWidth {
+    width: 80%;
 }
 table {
+    width: 100%;
     margin: 0;
     padding: 0;
     border-collapse: collapse;
@@ -99,7 +124,10 @@ table {
 td {
     margin: 0;
     padding: 0;
-    display: inline-block;
+}
+.NoMP {
+    margin: 0;
+    padding: 0;
 }
 .Link {
     text-decoration: none;
