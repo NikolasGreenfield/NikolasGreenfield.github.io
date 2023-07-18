@@ -90,6 +90,16 @@
 #ExperienceSection {
     background-color: rgba(255, 255, 255, 0.9);
 }
+.ResumeItemHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+.BulletList {
+    list-style-type: square;
+    margin-top: 0;
+}
 #EducationSection {
     background-color: rgba(255, 255, 255, 0.9);
     padding-bottom: 2em;
@@ -104,13 +114,6 @@
 .SectionHeader {
     border-bottom: 1px solid black;
     padding-bottom: 0.2em;
-}
-.ResumeItems {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0;
-    padding-bottom: 0;
 }
 .ShortenedWidth {
     width: 80%;
