@@ -36,6 +36,7 @@ function MainPage() {
 
     return (
         <div id="MainPage" >
+            {/*
             <Fab className="FloatingButton" id="ThemeFloatingButton"
                 style={floatingButtonStyle}>
                 <ContrastIcon/>
@@ -52,6 +53,7 @@ function MainPage() {
                     <h3>Home</h3>
                 </Fab>
             </div>
+            */}
 
             <div id="TitleCard" className={titleCardClass}>
                 <img id="ProfPhoto" 
