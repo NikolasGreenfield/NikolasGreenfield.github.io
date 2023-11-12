@@ -1,9 +1,10 @@
 import React, { useState, useEffect} from 'react';
-import { Link } from "react-router-dom";
-import { Fab } from '@mui/material';
-import ContrastIcon from '@mui/icons-material/Contrast';
+import { useNavigate } from "react-router-dom";
+import { Button } from '@mui/material';
+//import ContrastIcon from '@mui/icons-material/Contrast';
 import PermMediaIcon from '@mui/icons-material/PermMedia';
-import HomeIcon from '@mui/icons-material/Home';
+//import HomeIcon from '@mui/icons-material/Home';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import './MainPage.scss';
 import ProfPhoto from './CapAndGownPhoto.png'
@@ -15,6 +16,8 @@ function MainPage() {
     const [titleTextStyle2, setTitleTextStyle2] = useState<React.CSSProperties>({});
     const [BioTextStyle, setBioTextStyle] = useState<React.CSSProperties>({});
     const [pageContentStyle, setPageContentStyle] = useState<React.CSSProperties>({});
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setBioTextStyle({opacity: "0"});
@@ -68,7 +71,7 @@ function MainPage() {
                     </div>
                     <div id="BioText" style={BioTextStyle}>
                         <p style={{textAlign: "center"}}>
-                            Fresh graduate of Virginia Tech, software engineer, and gamer.
+                            Fresh graduate of Virginia Tech | Software Engineer | Gamer
                         </p>
                         <p style={{textIndent: "1em"}}>
                             I graduated at the age of 17 with my associates
@@ -84,9 +87,23 @@ function MainPage() {
             </div>
             <div id="ResumeContentBlock" style={pageContentStyle}>
                 <div id="PortfolioLinkSection">
-                    <h1><Link to={'portfolio'} className="Link">
+                    <Button className="RoutingButton"
+                        variant="contained"
+                        onClick={() => {navigate('portfolio')}}>
+                        <PermMediaIcon sx={{ mr: "1em" }}/>
                         Check Out My Portfolio
-                    </Link></h1>
+                    </Button>
+                    <Button className="RoutingButton"
+                        variant="contained"
+                        onClick={() => {
+                            window.open(
+                                "https://github.com/NikolasGreenfield/NikolasGreenfield.github.io/"
+                                ,
+                                "_blank")}
+                        }>
+                        <GitHubIcon sx={{ mr: "1em" }}/>
+                        Look at the code for this site on my Github!
+                    </Button>
                 </div>
 
                 <div  id="EducationSection" className="SectionBlock">
