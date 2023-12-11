@@ -6,12 +6,13 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import './App.scss';
 import MainPage from './Components/MainPage/MainPage';
+import PortfolioPage from "./Components/PortfolioPage/PortfolioPage";
 import {red} from '@mui/material/colors';
 
 // Defines the paths for routing between pages
 const router = createBrowserRouter([
   {path: "/", element: <MainPage/>},
-  {path: "/portfolio", element: <div>Portfolio!</div>},
+  {path: "/portfolio", element: <PortfolioPage/>},
 ]);
 
 // Defines the theme used for mui components.
