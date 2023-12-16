@@ -1,11 +1,13 @@
 import React, { useState, useEffect} from 'react';
 import './PortfolioPage.scss';
+import { NavigationButtons } from '../NavigationButtons/NavigationButtons';
+import { Pages } from '../../Globals'
 
 // Project pages
-import NikolasGreenfield from '../ProjectPages/NikolasGreenfield';
+import NikolasGreenfield from '../ProjectPages/NikolasGreenfield/NikolasGreenfield';
 
 function PortfolioPage() {
-    const ProjectPages: JSX.Element[] = [NikolasGreenfield(), NikolasGreenfield(), NikolasGreenfield(), NikolasGreenfield(), NikolasGreenfield(), NikolasGreenfield()];
+    const ProjectPages: JSX.Element[] = [NikolasGreenfield(), NikolasGreenfield(), NikolasGreenfield(), NikolasGreenfield(), NikolasGreenfield(), NikolasGreenfield(), NikolasGreenfield()];
     const [SelectedInd, SetSelectedInd] = 
         useState(Math.floor(ProjectPages.length > 0 ? ProjectPages.length / 2 : 0));
     const [ProjectPage, SetProjectPage] = useState(ProjectPages[SelectedInd]);
@@ -52,11 +54,13 @@ function PortfolioPage() {
 
     return (
         <div id="PortfolioPage">
-            <div id="ProjectGallery" style={{paddingTop: "1vh"}}>
+            <NavigationButtons currentPage={Pages.Portfolio}/>
+
+            <div id="ProjectGallery">
                 {CreateGallery()}
             </div>
 
-            <div id="ProjectPage" style={{marginTop: GalleryHeight + 2 + "vh"}}>
+            <div id="ProjectPage">
                 {ProjectPage}
             </div>
         </div>

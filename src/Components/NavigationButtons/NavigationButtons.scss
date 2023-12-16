@@ -1,0 +1,23 @@
+#NavigationButtons {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+}
+
+.NavigationButton {
+    margin-right: 20px;
+}
+#PortfolioFloatingButton {
+    width: 150px;
+    height: 50px;
+}
+#ThemeFloatingButton {
+    width: 60px;
+    height: 60px;
+}
+#HomeFloatingButton {
+    width: 120px;
+    height: 50px;
+}

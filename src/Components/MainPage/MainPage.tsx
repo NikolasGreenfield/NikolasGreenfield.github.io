@@ -1,28 +1,26 @@
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
-import { Button } from '@mui/material';
-//import ContrastIcon from '@mui/icons-material/Contrast';
+import { Button, Fab } from '@mui/material';
+import ContrastIcon from '@mui/icons-material/Contrast';
 import PermMediaIcon from '@mui/icons-material/PermMedia';
-//import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from '@mui/icons-material/Home';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
+import { NavigationButtons } from '../NavigationButtons/NavigationButtons';
 import './MainPage.scss';
 import ProfPhoto from './CapAndGownPhoto.png'
+import { Pages } from '../../Globals';
 
 function MainPage() {
     const [titleCardClass, setTitleCardClass] = useState<string>("");
-    const [floatingButtonStyle, setFloatingButtonStyle] = useState<React.CSSProperties>({});
     const [titleTextStyle, setTitleTextStyle] = useState<React.CSSProperties>({});
     const [titleTextStyle2, setTitleTextStyle2] = useState<React.CSSProperties>({});
     const [BioTextStyle, setBioTextStyle] = useState<React.CSSProperties>({});
     const [pageContentStyle, setPageContentStyle] = useState<React.CSSProperties>({});
 
-    const navigate = useNavigate();
-
     useEffect(() => {
         setBioTextStyle({opacity: "0"});
         setPageContentStyle({opacity: "0"});
-        setFloatingButtonStyle({opacity: "0"});
         setTimeout(() => {
             setTitleTextStyle({visibility: "visible"});
         }, 1000);
@@ -33,30 +31,12 @@ function MainPage() {
             setTitleCardClass("ShrinkTitleCardAnimation");
             setBioTextStyle({transition: "opacity 1s linear"});
             setPageContentStyle({transition: "opacity 1s linear"});
-            setFloatingButtonStyle({transition: "opacity 1s linear"});
         }, 4000);
     }, []);
 
     return (
         <div id="MainPage" >
-            {/*
-            <Fab className="FloatingButton" id="ThemeFloatingButton"
-                style={floatingButtonStyle}>
-                <ContrastIcon/>
-            </Fab>
-            <div id="NavigationButtons">
-                <Fab variant="extended" className="FloatingButton" id="PortfolioFloatingButton"
-                    style={floatingButtonStyle}>
-                    <PermMediaIcon sx={{ mr: 1 }}/>
-                    <h3>Portfolio</h3>
-                </Fab>
-                <Fab variant="extended" className="FloatingButton" id="HomeFloatingButton"
-                    style={floatingButtonStyle}>
-                    <HomeIcon sx={{ mr: 1 }}/>
-                    <h3>Home</h3>
-                </Fab>
-            </div>
-            */}
+            <NavigationButtons currentPage={Pages.Home}/>
 
             <div id="TitleCard" className={titleCardClass}>
                 <img id="ProfPhoto" 
@@ -86,25 +66,6 @@ function MainPage() {
                 </div>
             </div>
             <div id="ResumeContentBlock" style={pageContentStyle}>
-                <div id="PortfolioLinkSection">
-                    <Button className="RoutingButton"
-                        variant="contained"
-                        onClick={() => {navigate('portfolio')}}>
-                        <PermMediaIcon sx={{ mr: "1em" }}/>
-                        Check Out My Portfolio
-                    </Button>
-                    <Button className="RoutingButton"
-                        variant="contained"
-                        onClick={() => {
-                            window.open(
-                                "https://github.com/NikolasGreenfield/NikolasGreenfield.github.io/"
-                                ,
-                                "_blank")}
-                        }>
-                        <GitHubIcon sx={{ mr: "1em" }}/>
-                        Look at the code for this site on my Github!
-                    </Button>
-                </div>
 
                 <div  id="EducationSection" className="SectionBlock">
                     <h1 className="SectionHeader" style={{textAlign: "center"}}>My Education</h1>
