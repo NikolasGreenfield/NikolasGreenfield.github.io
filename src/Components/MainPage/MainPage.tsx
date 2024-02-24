@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, setRef } from "@mui/material";
 import PermMediaIcon from "@mui/icons-material/PermMedia";
@@ -15,19 +15,29 @@ class FloatingTextGraph {
     Descriptors: BioDescriptor[];
     RefreshInterval: number;
     DefaultSpeed: number;
+    XStart: number;
+    Width: number;
+    YStart: number;
+    Height: number;
 
     constructor(refreshInterval: number, defaultSpeed: number) {
         this.RefreshInterval = refreshInterval;
         this.DefaultSpeed = defaultSpeed;
         this.Descriptors = [];
+        this.XStart = 0;
+        this.Width = 0;
+        this.YStart = 0;
+        this.Height = 0;
     }
 
     /**
      * Adds a new descriptor to the graph with a random position and initial direction.
      * @param text The new text to display in the graph.
      */
-    AddDescriptor(text: string) {
-        this.Descriptors.push(new BioDescriptor(text, this.DefaultSpeed));
+    AddDescriptor(text: string, width: number, height: number) {
+        this.Descriptors.push(
+            new BioDescriptor(text, width, height, this.DefaultSpeed)
+        );
     }
 
     /**
@@ -35,11 +45,26 @@ class FloatingTextGraph {
      */
     MoveDescriptors(): void {
         this.Descriptors.forEach((value) => {
+            if (value.XPos < this.XStart) {
+                value.XPos = this.XStart;
+                value.XVel = -value.XVel;
+            } else if (value.XPos + value.Width > this.XStart + this.Width) {
+                value.XPos = this.XStart + this.Width - value.Width;
+                value.XVel = -value.XVel;
+            }
+            if (value.YPos < this.YStart) {
+                value.YPos = this.YStart;
+                value.YVel = -value.YVel;
+            } else if (value.YPos + value.Height > this.YStart + this.Height) {
+                value.YPos = this.YStart + this.Height - value.Height;
+                value.YVel = -value.YVel;
+            }
+
             value.XPos += value.XVel;
             value.YPos += value.YVel;
         });
 
-        this.HandleCollisions();
+        //this.HandleCollisions();
     }
 
     /**
@@ -51,10 +76,18 @@ class FloatingTextGraph {
                 if (
                     Math.abs(
                         this.Descriptors[i].XPos - this.Descriptors[j].XPos
-                    ) <= 20 &&
+                    ) <=
+                        Math.max(
+                            this.Descriptors[i].Width,
+                            this.Descriptors[j].Width
+                        ) &&
                     Math.abs(
                         this.Descriptors[i].YPos - this.Descriptors[j].YPos
-                    ) <= 20
+                    ) <=
+                        Math.max(
+                            this.Descriptors[i].Height,
+                            this.Descriptors[j].Height
+                        )
                 ) {
                     this.Descriptors[i].XVel = -this.Descriptors[i].XVel;
                     this.Descriptors[i].YVel = -this.Descriptors[i].YVel;
@@ -84,10 +117,18 @@ class FloatingTextGraph {
             elements.push(
                 <h1
                     className="FloatingText"
-                    style={{ left: curr.XPos, top: curr.YPos }}
+                    style={{
+                        position: "absolute",
+                        left: this.XStart + curr.XPos,
+                        top: this.YStart + curr.YPos,
+                        width: curr.Width,
+                        height: curr.Height,
+                        backgroundColor: "white",
+                        textAlign: "center",
+                    }}
                     key={i}
                 >
-                    {curr.Text}
+                    {curr.YPos}
                 </h1>
             );
         }
@@ -102,6 +143,8 @@ class FloatingTextGraph {
  */
 class BioDescriptor {
     Text: string;
+    Width: number;
+    Height: number;
     // Descriptor Text positions in pixels.
     XPos: number;
     YPos: number;
@@ -116,23 +159,22 @@ class BioDescriptor {
      * @param text
      * @param sectionData
      */
-    constructor(text: string, defaultSpeed: number) {
+    constructor(
+        text: string,
+        width: number,
+        height: number,
+        defaultSpeed: number
+    ) {
         this.Text = text;
+        this.Width = width;
+        this.Height = height;
+
         this.XPos = Math.floor(Math.random() * 360);
         this.YPos = Math.floor(Math.random() * 360);
-        this.DriftDirection = Math.floor(Math.random() * 360);
         this.DriftDirection = Math.floor(Math.random() * 360);
 
         this.XVel = defaultSpeed * Math.cos(this.DriftDirection);
         this.YVel = defaultSpeed * Math.sin(this.DriftDirection);
-    }
-
-    /**
-     * Moves the Descriptor in the direction of its
-     */
-    Move(): void {
-        this.XPos += this.XVel;
-        this.YPos += this.YVel;
     }
 }
 
@@ -143,18 +185,30 @@ class BioDescriptor {
 function MainPage() {
     const navigate = useNavigate();
     const [descriptorGraph, setDescriptorGraph] = useState<FloatingTextGraph>(
-        new FloatingTextGraph(10, 25 / (1000 / 10))
+        new FloatingTextGraph(10, 80 / (1000 / 10))
     );
     const [reRender, setReRender] = useState<boolean>(false);
+    const GraphContainer: React.RefObject<HTMLDivElement> =
+        useRef<HTMLDivElement>(null);
 
-    // Initialise descriptors in the graph.
+    // Initialize descriptors in the graph.
     useEffect(() => {
+        if (GraphContainer != null && GraphContainer.current != null) {
+            var graphContainer = GraphContainer.current.getBoundingClientRect();
+            descriptorGraph.XStart = graphContainer.x;
+            descriptorGraph.Width = graphContainer.width;
+            descriptorGraph.YStart = graphContainer.y;
+            descriptorGraph.Height = graphContainer.height;
+            console.log(graphContainer.x, graphContainer.width);
+            console.log(graphContainer.y, graphContainer.height);
+        }
+
         descriptorGraph.ClearDescriptors();
-        descriptorGraph.AddDescriptor("test1");
-        descriptorGraph.AddDescriptor("test2");
-        descriptorGraph.AddDescriptor("test3");
-        descriptorGraph.AddDescriptor("test4");
-        descriptorGraph.AddDescriptor("test5");
+        descriptorGraph.AddDescriptor("test1", 80, 40);
+        descriptorGraph.AddDescriptor("2", 80, 40);
+        descriptorGraph.AddDescriptor("test3", 80, 40);
+        descriptorGraph.AddDescriptor("test4", 80, 40);
+        descriptorGraph.AddDescriptor("test5", 80, 40);
     }, []);
 
     // Move graph descriptors
@@ -195,8 +249,7 @@ function MainPage() {
                 </div>
             </div>
             <hr />
-            <div id="BioDiagram">
-                <h1 style={{}}>body</h1>
+            <div id="BioGraphContainer" ref={GraphContainer}>
                 {descriptorGraph.GenerateJSXElements()}
             </div>
             <Footer />
