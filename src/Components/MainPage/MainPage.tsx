@@ -15,18 +15,14 @@ class FloatingTextGraph {
     Descriptors: BioDescriptor[];
     RefreshInterval: number;
     DefaultSpeed: number;
-    XStart: number;
     Width: number;
-    YStart: number;
     Height: number;
 
     constructor(refreshInterval: number, defaultSpeed: number) {
         this.RefreshInterval = refreshInterval;
         this.DefaultSpeed = defaultSpeed;
         this.Descriptors = [];
-        this.XStart = 0;
         this.Width = 0;
-        this.YStart = 0;
         this.Height = 0;
     }
 
@@ -35,9 +31,7 @@ class FloatingTextGraph {
      * @param text The new text to display in the graph.
      */
     AddDescriptor(text: string, width: number, height: number) {
-        this.Descriptors.push(
-            new BioDescriptor(text, width, height, this.DefaultSpeed)
-        );
+        this.Descriptors.push(new BioDescriptor(text, width, height, this.DefaultSpeed));
     }
 
     /**
@@ -45,18 +39,18 @@ class FloatingTextGraph {
      */
     MoveDescriptors(): void {
         this.Descriptors.forEach((value) => {
-            if (value.XPos < this.XStart) {
-                value.XPos = this.XStart;
+            if (value.XPos < 0) {
+                value.XPos = 0;
                 value.XVel = -value.XVel;
-            } else if (value.XPos + value.Width > this.XStart + this.Width) {
-                value.XPos = this.XStart + this.Width - value.Width;
+            } else if (value.XPos + value.Width > this.Width) {
+                value.XPos = this.Width - value.Width;
                 value.XVel = -value.XVel;
             }
-            if (value.YPos < this.YStart) {
-                value.YPos = this.YStart;
+            if (value.YPos < 0) {
+                value.YPos = 0;
                 value.YVel = -value.YVel;
-            } else if (value.YPos + value.Height > this.YStart + this.Height) {
-                value.YPos = this.YStart + this.Height - value.Height;
+            } else if (value.YPos + value.Height > this.Height) {
+                value.YPos = this.Height - value.Height;
                 value.YVel = -value.YVel;
             }
 
@@ -74,20 +68,10 @@ class FloatingTextGraph {
         for (var i = 0; i < this.Descriptors.length; i++) {
             for (var j = i + 1; j < this.Descriptors.length; j++) {
                 if (
-                    Math.abs(
-                        this.Descriptors[i].XPos - this.Descriptors[j].XPos
-                    ) <=
-                        Math.max(
-                            this.Descriptors[i].Width,
-                            this.Descriptors[j].Width
-                        ) &&
-                    Math.abs(
-                        this.Descriptors[i].YPos - this.Descriptors[j].YPos
-                    ) <=
-                        Math.max(
-                            this.Descriptors[i].Height,
-                            this.Descriptors[j].Height
-                        )
+                    Math.abs(this.Descriptors[i].XPos - this.Descriptors[j].XPos) <=
+                        Math.max(this.Descriptors[i].Width, this.Descriptors[j].Width) &&
+                    Math.abs(this.Descriptors[i].YPos - this.Descriptors[j].YPos) <=
+                        Math.max(this.Descriptors[i].Height, this.Descriptors[j].Height)
                 ) {
                     this.Descriptors[i].XVel = -this.Descriptors[i].XVel;
                     this.Descriptors[i].YVel = -this.Descriptors[i].YVel;
@@ -106,34 +90,33 @@ class FloatingTextGraph {
     }
 
     /**
-     * Converts the graph's descriptors to a jsx element array to display.
-     * @returns A JSX Element array representation of the graph's descriptors.
+     * Draws the descriptors onto the given canvas at their set width and height.
+     * @param canvas The Canvas rendering context to draw the elements onto.
      */
-    GenerateJSXElements(): JSX.Element[] {
-        let elements: JSX.Element[] = [];
+    Draw(canvas: CanvasRenderingContext2D): void {
+        canvas.clearRect(0, 0, this.Width, this.Height);
 
         for (let i = 0; i < this.Descriptors.length; i++) {
             let curr: BioDescriptor = this.Descriptors[i];
-            elements.push(
-                <h1
-                    className="FloatingText"
-                    style={{
-                        position: "absolute",
-                        left: this.XStart + curr.XPos,
-                        top: this.YStart + curr.YPos,
-                        width: curr.Width,
-                        height: curr.Height,
-                        backgroundColor: "white",
-                        textAlign: "center",
-                    }}
-                    key={i}
-                >
-                    {curr.YPos}
-                </h1>
+
+            // Line to the center;
+            canvas.moveTo(this.Width / 2, this.Height / 2);
+            canvas.lineTo(curr.XPos, curr.YPos);
+            canvas.stroke();
+
+            // Draw rectangle around text.
+            canvas.beginPath();
+            canvas.arc(curr.XPos, curr.YPos, curr.Width / 2, 0, 2 * Math.PI);
+            canvas.stroke();
+
+            // Draw descriptor text
+            canvas.font = "30px Arial";
+            canvas.fillText(
+                curr.Text,
+                curr.XPos - curr.Width / 2,
+                curr.YPos + curr.Height / 2
             );
         }
-
-        return elements;
     }
 }
 
@@ -159,12 +142,7 @@ class BioDescriptor {
      * @param text
      * @param sectionData
      */
-    constructor(
-        text: string,
-        width: number,
-        height: number,
-        defaultSpeed: number
-    ) {
+    constructor(text: string, width: number, height: number, defaultSpeed: number) {
         this.Text = text;
         this.Width = width;
         this.Height = height;
@@ -188,30 +166,36 @@ function MainPage() {
         new FloatingTextGraph(10, 80 / (1000 / 10))
     );
     const [reRender, setReRender] = useState<boolean>(false);
-    const GraphContainer: React.RefObject<HTMLDivElement> =
-        useRef<HTMLDivElement>(null);
+    const GraphContainer: React.RefObject<HTMLCanvasElement> =
+        useRef<HTMLCanvasElement>(null);
 
     // Initialize descriptors in the graph.
     useEffect(() => {
         if (GraphContainer != null && GraphContainer.current != null) {
             var graphContainer = GraphContainer.current.getBoundingClientRect();
-            descriptorGraph.XStart = graphContainer.x;
             descriptorGraph.Width = graphContainer.width;
-            descriptorGraph.YStart = graphContainer.y;
             descriptorGraph.Height = graphContainer.height;
-            console.log(graphContainer.x, graphContainer.width);
-            console.log(graphContainer.y, graphContainer.height);
         }
 
         descriptorGraph.ClearDescriptors();
         descriptorGraph.AddDescriptor("test1", 80, 40);
-        descriptorGraph.AddDescriptor("2", 80, 40);
+        descriptorGraph.AddDescriptor("test2", 80, 40);
         descriptorGraph.AddDescriptor("test3", 80, 40);
         descriptorGraph.AddDescriptor("test4", 80, 40);
         descriptorGraph.AddDescriptor("test5", 80, 40);
     }, []);
 
-    // Move graph descriptors
+    // Draw the Descriptor Graph.
+    useEffect(() => {
+        const canvas = GraphContainer?.current?.getContext("2d");
+        if (!canvas) {
+            return;
+        }
+
+        descriptorGraph.Draw(canvas);
+    });
+
+    // Rerender the component every Refresh Interval to do animations.
     setTimeout(() => {
         descriptorGraph.MoveDescriptors();
         setReRender(!reRender);
@@ -220,7 +204,11 @@ function MainPage() {
     return (
         <div id="MainPage">
             <div id="Header">
-                <img id="ProfPhoto" src={ProfPhoto} />
+                <img
+                    id="ProfPhoto"
+                    src={ProfPhoto}
+                    alt="Me Graduating from Virginia Tech in 2023."
+                />
                 <div id="LinksSection">
                     <h1 className="TitleText">Hi, I'm Nik</h1>
                     <Button
@@ -249,9 +237,17 @@ function MainPage() {
                 </div>
             </div>
             <hr />
+            {/*
             <div id="BioGraphContainer" ref={GraphContainer}>
                 {descriptorGraph.GenerateJSXElements()}
             </div>
+             */}
+            <canvas
+                id="BioGraphContainer"
+                ref={GraphContainer}
+                width="1000"
+                height="1000"
+            />
             <Footer />
         </div>
     );
