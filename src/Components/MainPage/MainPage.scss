@@ -36,6 +36,11 @@
 }
 
 #BioGraphContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#BioGraphCanvas {
     background-color: red;
 }
 

@@ -9,19 +9,22 @@ import { Footer } from "../Footer/Footer";
 import ProfPhoto from "./CapAndGownPhoto.png";
 
 /**
- * Class encompassing the
+ * Class encompassing a graph of moving text.
+ * The text bubbles move naturally, and can be moved manually, giving them velocity.
  */
 class FloatingTextGraph {
-    Descriptors: BioDescriptor[];
-    RefreshInterval: number;
-    DefaultSpeed: number;
-    Width: number;
-    Height: number;
+    private static TextColor: string = "black";
+    private static DescriptorColors: string[] = ["grey", "blue"];
+    private Descriptors: BioDescriptor[];
+    private DefaultSpeed: number = 80 / (1000 / 10);
+    public RefreshInterval: number = 10;
+    public Width: number;
+    public Height: number;
 
-    constructor(refreshInterval: number, defaultSpeed: number) {
+    constructor(refreshInterval: number = 0, defaultSpeed: number) {
         this.RefreshInterval = refreshInterval;
         this.DefaultSpeed = defaultSpeed;
-        this.Descriptors = [];
+        this.Descriptors = new Array<BioDescriptor>();
         this.Width = 0;
         this.Height = 0;
     }
@@ -31,7 +34,15 @@ class FloatingTextGraph {
      * @param text The new text to display in the graph.
      */
     AddDescriptor(text: string, width: number, height: number) {
-        this.Descriptors.push(new BioDescriptor(text, width, height, this.DefaultSpeed));
+        this.Descriptors.push(
+            new BioDescriptor(
+                text,
+                width,
+                height,
+                this.DefaultSpeed,
+                FloatingTextGraph.getRandomColor()
+            )
+        );
     }
 
     /**
@@ -65,18 +76,20 @@ class FloatingTextGraph {
      * Check all descriptor positions. If two collide, invert their velocities.
      */
     HandleCollisions(): void {
-        for (var i = 0; i < this.Descriptors.length; i++) {
-            for (var j = i + 1; j < this.Descriptors.length; j++) {
+        for (let i = 0; i < this.Descriptors.length; i++) {
+            for (let j = i + 1; j < this.Descriptors.length; j++) {
+                let desc1 = this.Descriptors[i];
+                let desc2 = this.Descriptors[j];
                 if (
-                    Math.abs(this.Descriptors[i].XPos - this.Descriptors[j].XPos) <=
-                        Math.max(this.Descriptors[i].Width, this.Descriptors[j].Width) &&
-                    Math.abs(this.Descriptors[i].YPos - this.Descriptors[j].YPos) <=
-                        Math.max(this.Descriptors[i].Height, this.Descriptors[j].Height)
+                    Math.abs(desc1.XPos - desc2.XPos) <=
+                        Math.max(desc1.Width, desc2.Width) &&
+                    Math.abs(desc1.YPos - desc2.YPos) <=
+                        Math.max(desc1.Height, desc2.Height)
                 ) {
-                    this.Descriptors[i].XVel = -this.Descriptors[i].XVel;
-                    this.Descriptors[i].YVel = -this.Descriptors[i].YVel;
-                    this.Descriptors[j].XVel = -this.Descriptors[j].XVel;
-                    this.Descriptors[j].YVel = -this.Descriptors[j].YVel;
+                    desc1.XVel = -desc1.XVel;
+                    desc1.YVel = -desc1.YVel;
+                    desc2.XVel = -desc2.XVel;
+                    desc2.YVel = -desc2.YVel;
                 }
             }
         }
@@ -87,6 +100,17 @@ class FloatingTextGraph {
      */
     ClearDescriptors(): void {
         this.Descriptors = [];
+    }
+
+    /**
+     * Gets a random descriptor color from the DescriptorColors array.
+     * @returns A random descriptor color.
+     */
+    static getRandomColor(): string {
+        let randInd = Math.floor(
+            Math.random() * FloatingTextGraph.DescriptorColors.length
+        );
+        return FloatingTextGraph.DescriptorColors[randInd];
     }
 
     /**
@@ -101,21 +125,19 @@ class FloatingTextGraph {
 
             // Line to the center;
             canvas.moveTo(this.Width / 2, this.Height / 2);
-            canvas.lineTo(curr.XPos, curr.YPos);
+            canvas.lineTo(curr.XPos + curr.Width / 2, curr.YPos + curr.Height / 2);
             canvas.stroke();
 
             // Draw rectangle around text.
             canvas.beginPath();
-            canvas.arc(curr.XPos, curr.YPos, curr.Width / 2, 0, 2 * Math.PI);
+            canvas.fillStyle = curr.Color;
+            canvas.fillRect(curr.XPos, curr.YPos, curr.Width, curr.Height);
             canvas.stroke();
 
             // Draw descriptor text
             canvas.font = "30px Arial";
-            canvas.fillText(
-                curr.Text,
-                curr.XPos - curr.Width / 2,
-                curr.YPos + curr.Height / 2
-            );
+            canvas.fillStyle = FloatingTextGraph.TextColor;
+            canvas.fillText(curr.Text, curr.XPos, curr.YPos + (curr.Height * 3) / 4);
         }
     }
 }
@@ -126,6 +148,7 @@ class FloatingTextGraph {
  */
 class BioDescriptor {
     Text: string;
+    Color: string;
     Width: number;
     Height: number;
     // Descriptor Text positions in pixels.
@@ -142,8 +165,15 @@ class BioDescriptor {
      * @param text
      * @param sectionData
      */
-    constructor(text: string, width: number, height: number, defaultSpeed: number) {
+    constructor(
+        text: string,
+        width: number,
+        height: number,
+        defaultSpeed: number,
+        color: string
+    ) {
         this.Text = text;
+        this.Color = color;
         this.Width = width;
         this.Height = height;
 
@@ -166,6 +196,8 @@ function MainPage() {
         new FloatingTextGraph(10, 80 / (1000 / 10))
     );
     const [reRender, setReRender] = useState<boolean>(false);
+    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth * 0.8);
+    const [screenHeight, setScreenHeight] = useState<number>(window.innerHeight * 0.8);
     const GraphContainer: React.RefObject<HTMLCanvasElement> =
         useRef<HTMLCanvasElement>(null);
 
@@ -193,6 +225,14 @@ function MainPage() {
         }
 
         descriptorGraph.Draw(canvas);
+        if (
+            screenWidth !== window.innerWidth * 0.8 ||
+            screenHeight !== window.innerHeight * 0.8
+        ) {
+            setScreenWidth(window.innerWidth * 0.8);
+            setScreenHeight(window.innerHeight * 0.8);
+            console.log(screenWidth, window.screen.width);
+        }
     });
 
     // Rerender the component every Refresh Interval to do animations.
@@ -242,12 +282,14 @@ function MainPage() {
                 {descriptorGraph.GenerateJSXElements()}
             </div>
              */}
-            <canvas
-                id="BioGraphContainer"
-                ref={GraphContainer}
-                width="1000"
-                height="1000"
-            />
+            <div id="BioGraphContainer">
+                <canvas
+                    id="BioGraphCanvas"
+                    ref={GraphContainer}
+                    width={screenWidth}
+                    height={screenHeight}
+                />
+            </div>
             <Footer />
         </div>
     );
