@@ -225,13 +225,11 @@ function MainPage() {
         }
 
         descriptorGraph.Draw(canvas);
-        if (
-            screenWidth !== window.innerWidth * 0.8 ||
-            screenHeight !== window.innerHeight * 0.8
-        ) {
-            setScreenWidth(window.innerWidth * 0.8);
-            setScreenHeight(window.innerHeight * 0.8);
-            console.log(screenWidth, window.screen.width);
+        if (descriptorGraph.Width !== window.innerWidth * 0.8) {
+            descriptorGraph.Width = window.innerWidth * 0.8;
+        }
+        if (descriptorGraph.Height !== window.innerHeight * 0.8) {
+            descriptorGraph.Height = window.innerHeight * 0.8;
         }
     });
 
@@ -286,8 +284,8 @@ function MainPage() {
                 <canvas
                     id="BioGraphCanvas"
                     ref={GraphContainer}
-                    width={screenWidth}
-                    height={screenHeight}
+                    width={window.innerWidth * 0.8}
+                    height={window.innerHeight * 0.8}
                 />
             </div>
             <Footer />
