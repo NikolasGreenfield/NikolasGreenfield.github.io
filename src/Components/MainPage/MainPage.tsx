@@ -34,15 +34,33 @@ class FloatingTextGraph {
      * @param text The new text to display in the graph.
      */
     AddDescriptor(text: string, width: number, height: number) {
-        this.Descriptors.push(
-            new BioDescriptor(
-                text,
-                width,
-                height,
-                this.DefaultSpeed,
-                FloatingTextGraph.getRandomColor()
-            )
-        );
+        let Colliding: boolean;
+        do {
+            Colliding = false;
+            let newXPos = Math.floor(Math.random() * this.Width);
+            let newYPos = Math.floor(Math.random() * this.Height);
+
+            for (const value of this.Descriptors) {
+                if (newXPos + width >= value.XPos && newXPos <= value.XPos + value.Width
+                    && newYPos + height >= value.YPos && newXPos < value.XPos + value.Width) {
+                    Colliding = true;
+                }
+            };
+
+            if (!Colliding) {
+                this.Descriptors.push(
+                    new BioDescriptor(
+                        text,
+                        newXPos,
+                        newYPos,
+                        width,
+                        height,
+                        this.DefaultSpeed,
+                        FloatingTextGraph.getRandomColor()
+                    )
+                );
+            }
+        } while (Colliding);
     }
 
     /**
@@ -69,27 +87,30 @@ class FloatingTextGraph {
             value.YPos += value.YVel;
         });
 
-        //this.HandleCollisions();
+        this.HandleCollisions();
     }
 
     /**
-     * Check all descriptor positions. If two collide, invert their velocities.
+     * Check all descriptor positions. If two collide, change their directions only.
      */
     HandleCollisions(): void {
         for (let i = 0; i < this.Descriptors.length; i++) {
             for (let j = i + 1; j < this.Descriptors.length; j++) {
-                let desc1 = this.Descriptors[i];
-                let desc2 = this.Descriptors[j];
+                let desc1: BioDescriptor = this.Descriptors[i];
+                let desc2: BioDescriptor = this.Descriptors[j];
                 if (
                     Math.abs(desc1.XPos - desc2.XPos) <=
                         Math.max(desc1.Width, desc2.Width) &&
                     Math.abs(desc1.YPos - desc2.YPos) <=
                         Math.max(desc1.Height, desc2.Height)
                 ) {
-                    desc1.XVel = -desc1.XVel;
-                    desc1.YVel = -desc1.YVel;
-                    desc2.XVel = -desc2.XVel;
-                    desc2.YVel = -desc2.YVel;
+                    let temp: number = desc1.XVel;
+                    desc1.XVel = desc2.XVel;
+                    desc2.XVel = temp;
+
+                    temp = desc1.YVel;
+                    desc1.YVel = desc2.YVel;
+                    desc2.YVel = temp;
                 }
             }
         }
@@ -120,13 +141,16 @@ class FloatingTextGraph {
     Draw(canvas: CanvasRenderingContext2D): void {
         canvas.clearRect(0, 0, this.Width, this.Height);
 
+        // Draw their lines to the center first to avoid overlap.
         for (let i = 0; i < this.Descriptors.length; i++) {
             let curr: BioDescriptor = this.Descriptors[i];
-
-            // Line to the center;
             canvas.moveTo(this.Width / 2, this.Height / 2);
             canvas.lineTo(curr.XPos + curr.Width / 2, curr.YPos + curr.Height / 2);
             canvas.stroke();
+        }
+
+        for (let i = 0; i < this.Descriptors.length; i++) {
+            let curr: BioDescriptor = this.Descriptors[i];
 
             // Draw rectangle around text.
             canvas.beginPath();
@@ -147,18 +171,18 @@ class FloatingTextGraph {
  * drift naturally and can be moved by the player.
  */
 class BioDescriptor {
-    Text: string;
-    Color: string;
-    Width: number;
-    Height: number;
+    public Text: string;
+    public Color: string;
+    public Width: number;
+    public Height: number;
     // Descriptor Text positions in pixels.
-    XPos: number;
-    YPos: number;
+    public XPos: number;
+    public YPos: number;
     // Descriptor velocities in pixels per second.
-    XVel: number;
-    YVel: number;
+    public XVel: number;
+    public YVel: number;
     // Direction, in degrees, that the BioDescriptor will move in naturally
-    DriftDirection: number;
+    public DriftDirection: number;
 
     /**
      * Creates a new BioDescriptor with the given text, random position and random drive direction
@@ -167,6 +191,8 @@ class BioDescriptor {
      */
     constructor(
         text: string,
+        xPos: number,
+        yPos: number,
         width: number,
         height: number,
         defaultSpeed: number,
@@ -174,11 +200,12 @@ class BioDescriptor {
     ) {
         this.Text = text;
         this.Color = color;
+
+        this.XPos = xPos;
         this.Width = width;
+        this.YPos = yPos;
         this.Height = height;
 
-        this.XPos = Math.floor(Math.random() * 360);
-        this.YPos = Math.floor(Math.random() * 360);
         this.DriftDirection = Math.floor(Math.random() * 360);
 
         this.XVel = defaultSpeed * Math.cos(this.DriftDirection);
@@ -193,7 +220,7 @@ class BioDescriptor {
 function MainPage() {
     const navigate = useNavigate();
     const [descriptorGraph, setDescriptorGraph] = useState<FloatingTextGraph>(
-        new FloatingTextGraph(10, 80 / (1000 / 10))
+        new FloatingTextGraph(10, 30 / (1000 / 10))
     );
     const [reRender, setReRender] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth * 0.8);
@@ -210,6 +237,31 @@ function MainPage() {
         }
 
         descriptorGraph.ClearDescriptors();
+        descriptorGraph.AddDescriptor("test1", 80, 40);
+        descriptorGraph.AddDescriptor("test2", 80, 40);
+        descriptorGraph.AddDescriptor("test3", 80, 40);
+        descriptorGraph.AddDescriptor("test4", 80, 40);
+        descriptorGraph.AddDescriptor("test5", 80, 40);
+        descriptorGraph.AddDescriptor("test1", 80, 40);
+        descriptorGraph.AddDescriptor("test2", 80, 40);
+        descriptorGraph.AddDescriptor("test3", 80, 40);
+        descriptorGraph.AddDescriptor("test4", 80, 40);
+        descriptorGraph.AddDescriptor("test5", 80, 40);
+        descriptorGraph.AddDescriptor("test1", 80, 40);
+        descriptorGraph.AddDescriptor("test2", 80, 40);
+        descriptorGraph.AddDescriptor("test3", 80, 40);
+        descriptorGraph.AddDescriptor("test4", 80, 40);
+        descriptorGraph.AddDescriptor("test5", 80, 40);
+        descriptorGraph.AddDescriptor("test1", 80, 40);
+        descriptorGraph.AddDescriptor("test2", 80, 40);
+        descriptorGraph.AddDescriptor("test3", 80, 40);
+        descriptorGraph.AddDescriptor("test4", 80, 40);
+        descriptorGraph.AddDescriptor("test5", 80, 40);
+        descriptorGraph.AddDescriptor("test1", 80, 40);
+        descriptorGraph.AddDescriptor("test2", 80, 40);
+        descriptorGraph.AddDescriptor("test3", 80, 40);
+        descriptorGraph.AddDescriptor("test4", 80, 40);
+        descriptorGraph.AddDescriptor("test5", 80, 40);
         descriptorGraph.AddDescriptor("test1", 80, 40);
         descriptorGraph.AddDescriptor("test2", 80, 40);
         descriptorGraph.AddDescriptor("test3", 80, 40);
