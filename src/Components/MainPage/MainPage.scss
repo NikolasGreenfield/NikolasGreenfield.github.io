@@ -7,8 +7,18 @@
 
 #MainPage {
     background-color: $backgroundMain;
-    height: 100vh;
-    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+#Body {
+    align-self: first;
+}
+
+#Footer {
+    align-self: last;
 }
 
 #Header {
@@ -35,15 +45,8 @@
     flex-direction: column;
 }
 
-#BioGraphContainer {
+#DescriptorGraph {
     display: flex;
     justify-content: center;
-}
-
-#BioGraphCanvas {
-    background-color: red;
-}
-
-.FloatingText {
-    position: absolute;
+    border: "5px solid black";
 }

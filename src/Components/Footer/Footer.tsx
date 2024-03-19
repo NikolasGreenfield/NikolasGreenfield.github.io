@@ -1,6 +1,12 @@
-export function Footer() {
+import "./Footer.scss";
+
+export function Footer({
+    Style = undefined,
+}: {
+    Style?: React.CSSProperties | undefined;
+}) {
     return (
-        <div>
+        <div id="Footer" style={Style}>
             <h1>Footer</h1>
         </div>
     );
